@@ -1,0 +1,26 @@
+{% extends 'website/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Products</h2>
+
+{% if products %}
+<div class="row">
+  {% for product in products %}
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+        <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+        <p class="card-text"><strong>Stock:</strong> {{ product.stock }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p>No products available.</p>
+{% endif %}
+{% endblock %}

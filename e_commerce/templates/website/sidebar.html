@@ -1,0 +1,26 @@
+<div class="sidebar bg-light p-3" style="width: 200px; height: 100vh; position: fixed;">
+    <h4>Menu</h4>
+    <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+            <a class="nav-link btn {% if request.path == '/' %}btn-primary{% else %}btn-outline-primary{% endif %}" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item mb-2">
+            <a class="nav-link btn {% if request.path == '/dashboard/' %}btn-primary{% else %}btn-outline-primary{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
+        </li>
+        <li class="nav-item mb-2">
+            <a class="nav-link btn {% if request.path == '/add_product/' %}btn-primary{% else %}btn-outline-primary{% endif %}" href="{% url 'add_product' %}">Add Product</a>
+        </li>
+        <li class="nav-item mb-2">
+            <a class="nav-link btn {% if request.path == '/products_list/' %}btn-primary{% else %}btn-outline-primary{% endif %}" href="{% url 'products_list' %}">Products List</a>
+        </li>
+        <li class="nav-item mb-2">
+            <a class="nav-link btn {% if request.path == '/add_user/' %}btn-primary{% else %}btn-outline-primary{% endif %}" href="{% url 'add_user' %}">Add User</a>
+        </li>
+        <li class="nav-item mb-2">
+            <a class="nav-link btn {% if request.path == '/users_list/' %}btn-primary{% else %}btn-outline-primary{% endif %}" href="{% url 'users_list' %}">Users List</a>
+        </li>
+        <li class="nav-item mt-4">
+            <a class="nav-link btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
+        </li>
+    </ul>
+</div>

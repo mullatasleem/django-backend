@@ -1,0 +1,65 @@
+{% extends 'website/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="card p-3 text-center">
+      <h5>Total Products</h5>
+      <h3>{{ total_products }}</h3>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card p-3 text-center">
+      <h5>Total Stock</h5>
+      <h3>{{ total_stock }}</h3>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card p-3 text-center">
+      <h5>Average Price</h5>
+      <h3>${{ average_price|floatformat:2 }}</h3>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <canvas id="priceChart"></canvas>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Use json_script to safely output JSON data -->
+{{ products|json_script:"products-data" }}
+{{ prices|json_script:"prices-data" }}
+
+<script>
+  const ctx = document.getElementById('priceChart').getContext('2d');
+
+  const productLabels = JSON.parse(document.getElementById('products-data').textContent).map(p => p.name);
+  const productPrices = JSON.parse(document.getElementById('prices-data').textContent);
+
+  const priceChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: productLabels,
+          datasets: [{
+              label: 'Product Prices',
+              data: productPrices,
+              backgroundColor: 'rgba(54, 162, 235, 0.6)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: { beginAtZero: true }
+          }
+      }
+  });
+</script>
+{% endblock %}
